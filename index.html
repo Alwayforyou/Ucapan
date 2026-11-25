@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff0f4">
+<title>Sebuah Kisah Kecil — Tiara</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+:root{--ink:#594b57;--muted:#927f91;--rose:#d88fa8;--pink:#ffe7ef;--cream:#fffaf7;--lilac:#eee7ff;--sage:#e5f0e6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#fff4f5,#f7efff 48%,#eff9f2);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 20%,#fff 0 2px,transparent 3px),radial-gradient(circle at 75% 65%,#fff 0 2px,transparent 3px);background-size:75px 75px;opacity:.5;z-index:0}
+main{min-height:100vh;display:grid;place-items:center;padding:30px 15px;position:relative;z-index:1}
+.card{width:min(850px,100%);min-height:620px;background:rgba(255,251,250,.88);backdrop-filter:blur(12px);border:2px solid rgba(255,255,255,.9);border-radius:34px;box-shadow:0 25px 80px #9e7a9b25, inset 0 0 0 1px #eacbd9;padding:clamp(28px,6vw,65px);position:relative;overflow:hidden;text-align:center}
+.card:before{content:"";position:absolute;inset:12px;border:1px dashed #e9b8cc;border-radius:25px;pointer-events:none}
+.screen{display:none;position:relative;z-index:1;animation:pageIn .85s cubic-bezier(.2,.8,.2,1) both}
+.screen.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(25px) scale(.98);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+.kicker{letter-spacing:.2em;text-transform:uppercase;font-size:10px;color:#c17e9a;font-weight:700}
+h1,h2{font-family:'Playfair Display',serif;font-weight:500}
+h1{font-size:clamp(43px,8vw,76px);line-height:1.05;margin:18px 0}
+h2{font-size:clamp(30px,6vw,46px);line-height:1.15;margin:12px 0 20px}
+.subtitle{color:var(--muted);line-height:1.9;max-width:510px;margin:0 auto}
+.ornament{font-size:34px;color:#d88fa8;margin:22px 0;letter-spacing:9px}
+button{border:0;background:linear-gradient(135deg,#e5a0b7,#c58fbd);color:white;border-radius:999px;padding:14px 27px;font:700 13px 'DM Sans',sans-serif;letter-spacing:.04em;cursor:pointer;box-shadow:0 9px 22px #cf91ae55;transition:transform .25s,filter .25s}
+button:hover{transform:translateY(-3px) scale(1.03);filter:saturate(1.12)}
+button:focus-visible{outline:3px solid #a66b8b;outline-offset:4px}
+.actions{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+button.secondary{background:#fff7fa;color:#bd7e9b;border:1px solid #e7bbcc;box-shadow:none}
+.story{max-width:650px;margin:0 auto;text-align:left;white-space:normal;font-size:14px;line-height:1.95;color:#6b5b68}
+.story p{margin:0 0 14px}
+.story .closing{font-family:'Playfair Display',serif;font-style:italic;color:#ad718d;text-align:center;font-size:17px;line-height:1.7;margin:25px 0 0}
+.page-number{font-size:10px;letter-spacing:.2em;color:#b38b9e;margin-top:25px}
+.progress{height:4px;background:#f4dce6;border-radius:9px;max-width:190px;margin:13px auto 0;overflow:hidden}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#e6a0b9,#b99be0);transition:width .5s}
+.corner{position:absolute;font-size:28px;color:#d9a4ba;z-index:2;animation:sway 4s ease-in-out infinite}
+.c1{top:23px;left:28px}.c2{top:23px;right:28px;animation-delay:-2s}.c3{bottom:22px;left:28px;animation-delay:-1s}.c4{bottom:22px;right:28px;animation-delay:-3s}
+@keyframes sway{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(12deg) translateY(-7px)}}
+.butterfly{position:fixed;z-index:5;pointer-events:none;font-size:23px;filter:drop-shadow(0 3px 4px #d58cab55);animation:fly 14s linear infinite}
+.b1{left:-8%;top:25%;animation-delay:0s}.b2{left:-10%;top:70%;animation-delay:-5s;font-size:18px}.b3{left:-7%;top:48%;animation-delay:-9s;font-size:26px}
+@keyframes fly{0%{transform:translate(-5vw,10vh) rotate(0deg) scale(.8)}25%{transform:translate(30vw,-12vh) rotate(22deg) scale(1.1)}50%{transform:translate(58vw,12vh) rotate(-15deg) scale(.9)}75%{transform:translate(85vw,-8vh) rotate(25deg) scale(1.05)}100%{transform:translate(115vw,8vh) rotate(-10deg) scale(.8)}}
+.sparkle{position:fixed;z-index:0;color:#e3a7bf;opacity:.55;animation:twinkle 3s ease-in-out infinite}
+.s1{top:12%;left:7%}.s2{top:78%;right:8%;animation-delay:-1s}.s3{top:35%;right:5%;animation-delay:-2s}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7) rotate(0)}50%{opacity:.85;transform:scale(1.2) rotate(45deg)}}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:25px auto 8px;max-width:650px}
+.photo-frame{position:relative;background:#fff;border:8px solid #fff;border-radius:17px;padding:7px 7px 16px;box-shadow:0 9px 24px #9e7a9b24;transform:rotate(-1.6deg);transition:transform .35s,box-shadow .35s;animation:photoFloat 5s ease-in-out infinite}
+.photo-frame:nth-child(2n){transform:rotate(1.7deg);animation-delay:-2s}
+.photo-frame:hover{transform:rotate(0) translateY(-6px) scale(1.025);box-shadow:0 15px 32px #9e7a9b38}
+.photo-frame:after{content:"✿";position:absolute;right:-9px;top:-15px;background:#ffe4ef;color:#c67e9d;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;font-size:17px;box-shadow:0 3px 8px #b77e9b33}
+.photo-frame img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
+.photo-caption{font-family:'Playfair Display',serif;color:#a36f89;font-size:13px;margin-top:9px}
+@keyframes photoFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.gallery-note{text-align:center;color:#a17e92;font-size:12px;margin:12px 0 0;font-style:italic}
+.cover-bloom{font-size:50px;animation:bloom 4s ease-in-out infinite}
+@keyframes bloom{0%,100%{transform:scale(.95) rotate(-4deg)}50%{transform:scale(1.08) rotate(4deg)}}
+@media(max-width:560px){main{padding:14px 10px}.card{min-height:calc(100vh - 28px);padding:48px 23px;border-radius:27px}.card:before{inset:8px}.gallery{gap:12px}.photo-frame{border-width:6px;padding:5px 5px 12px}.photo-caption{font-size:11px}.story{font-size:13px;line-height:1.85}.corner{font-size:22px}.c1,.c3{left:17px}.c2,.c4{right:17px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="butterfly b1">🦋</div><div class="butterfly b2">🦋</div><div class="butterfly b3">🦋</div>
+<div class="sparkle s1">✧</div><div class="sparkle s2">✦</div><div class="sparkle s3">✧</div>
+<main><section class="card" aria-live="polite">
+  <span class="corner c1">❀</span><span class="corner c2">✿</span><span class="corner c3">✿</span><span class="corner c4">❀</span>
+  <div class="screen active" id="cover">
+    <div class="kicker">a little story, made with warmth</div>
+    <div class="ornament cover-bloom">🌷 ✧ 🦋</div>
+    <h1>Sebuah<br><em>Kisah Kecil</em></h1>
+    <p class="subtitle">Tentang pertemuan sederhana, persahabatan, dan kenangan manis yang tersimpan di antara dunia Heartopia.</p>
+    <div class="actions"><button onclick="startStory()">Buka Kisah ✧</button></div>
+    <p class="page-number">BUKA PERLAHAN, ADA KENANGAN DI DALAMNYA</p>
+  </div>
+
+  <div class="screen" id="page1">
+    <div class="kicker">01 · awal cerita</div><h2>Berawal dari Sebuah Permainan</h2>
+    <div class="story">
+      <p>Tidak pernah terpikir sebelumnya bahwa sebuah permainan bernama Heartopia akan mempertemukanku dengan seseorang yang kemudian menjadi teman dekat sekaligus sahabat.</p>
+      <p>Awalnya, kita hanya dua orang yang kebetulan bertemu di dalam game. Tidak ada hal istimewa yang terpikirkan saat itu. Kita mulai berkenalan, bermain bersama, dan menghabiskan waktu dengan berbagai aktivitas sederhana di Heartopia.</p>
+      <p>Seiring berjalannya waktu, kebersamaan itu semakin sering terjadi. Dari yang awalnya hanya membicarakan permainan, percakapan kita mulai meluas ke berbagai hal di kehidupan nyata. Kita saling berbagi cerita tentang keseharian, pengalaman, pemikiran, hingga hal-hal yang terkadang sulit diceritakan kepada orang lain.</p>
+      <p>Ada banyak percakapan yang mungkin terlihat biasa saja bagi orang lain, tetapi justru menjadi bagian menyenangkan dari hari-hariku. Kita bisa tertawa karena hal kecil, membicarakan sesuatu tanpa arah, bahkan menghabiskan waktu cukup lama hanya untuk saling bertukar cerita.</p>
+      <p>Tanpa terasa, hubungan yang awalnya sebatas teman bermain berkembang menjadi sebuah pertemanan yang lebih dekat. Kita mulai saling mengenal, memahami kebiasaan masing-masing, dan memberikan ruang untuk bercerita tanpa perlu merasa canggung.</p>
+      <p>Pada akhirnya, aku menyadari bahwa pertemuan ini bukan sekadar tentang menemukan teman bermain baru. Lebih dari itu, aku menemukan seseorang yang bisa kuanggap sebagai sahabat.</p>
+      <p class="closing">“Siapa sangka, dari sebuah permainan sederhana, kita justru mendapatkan pertemanan yang begitu berarti.”</p>
+    </div>
+    <div class="gallery">
+      <div class="photo-frame"><img src="kenangan-01.jpg" alt="Kenangan bermain Heartopia bersama"><div class="photo-caption">Awal kebersamaan ✿</div></div>
+      <div class="photo-frame"><img src="kenangan-02.jpg" alt="Kenangan di bawah cahaya bulan"><div class="photo-caption">Momen yang manis ✧</div></div>
+    </div>
+    <p class="gallery-note">Beberapa momen sederhana yang layak disimpan dalam ingatan.</p>
+    <div class="page-number">01 / 03<div class="progress"><span style="width:33%"></span></div></div>
+    <div class="actions"><button onclick="showPage(2)">Lanjutkan →</button></div>
+  </div>
+
+  <div class="screen" id="page2">
+    <div class="kicker">02 · mengenal lebih dekat</div><h2>Di Balik Nama yang Kini Kukenal</h2>
+    <div class="story">
+      <p>Setelah cukup banyak waktu kita habiskan bersama, ada satu hal yang akhirnya kuketahui tentang dirimu, yaitu nama aslimu. Namamu Tiara Humaira, sebuah nama yang menurutku indah dan memiliki kesan tersendiri.</p>
+      <p>Mengetahui nama aslimu mungkin terdengar seperti hal sederhana, tetapi bagiku itu menjadi salah satu bagian dari proses mengenalmu lebih jauh. Sebab, selama ini aku hanya mengenalmu melalui sosok yang kutemui di Heartopia, hingga akhirnya perlahan mengetahui lebih banyak tentang dirimu.</p>
+      <p>Semakin banyak cerita yang kita bagikan, semakin aku memahami bahwa kita ternyata memiliki beberapa kesamaan. Kita sama-sama mempunyai sisi rapuh, sama-sama bisa merasa lelah, dan terkadang kesulitan menghadapi hal-hal yang terjadi dalam kehidupan.</p>
+      <p>Aku rasa, tidak semua orang mampu menunjukkan sisi lemahnya kepada orang lain. Namun, dalam pertemanan ini, kita bisa saling bercerita tanpa harus selalu berpura-pura kuat. Ada kalanya kita hanya ingin didengarkan, bukan dinasihati. Ada pula saat ketika kita membutuhkan seseorang yang bisa memahami tanpa harus mengetahui seluruh penjelasannya.</p>
+      <p>Mungkin kita bukan dua orang yang selalu pandai menghadapi keadaan, tetapi setidaknya kita bisa saling memahami bahwa setiap orang mempunyai batas dan perjuangannya masing-masing.</p>
+      <p>Bagiku, mengenalmu lebih jauh adalah salah satu hal menyenangkan dari pertemanan ini. Bukan karena kamu harus selalu menjadi orang yang menyenangkan, melainkan karena aku bisa mengenal dirimu apa adanya.</p>
+      <p class="closing">“Senang bisa mengenalmu, Tiara. Semoga kita tetap menjadi dua teman yang bisa saling memahami, bahkan ketika keadaan sedang tidak baik-baik saja.”</p>
+    </div>
+    <div class="gallery">
+      <div class="photo-frame"><img src="kenangan-03.jpg" alt="Kenangan bersama di Heartopia"><div class="photo-caption">Satu dunia, banyak cerita ♡</div></div>
+      <div class="photo-frame"><img src="kenangan-04.jpg" alt="Kenangan berdua di taman"><div class="photo-caption">Kenangan kecil kita ✿</div></div>
+    </div>
+    <div class="page-number">02 / 03<div class="progress"><span style="width:66%"></span></div></div>
+    <div class="actions"><button class="secondary" onclick="showPage(1)">← Kembali</button><button onclick="showPage(3)">Lanjutkan →</button></div>
+  </div>
+
+  <div class="screen" id="page3">
+    <div class="kicker">03 · hari istimewa</div><h2>Untuk Teman Ringkihku</h2>
+    <div class="story">
+      <p>Selamat ulang tahun, Tiara Humaira.</p>
+      <p>Hari ini menjadi satu langkah baru dalam perjalanan hidupmu. Ada banyak hal yang ingin kusampaikan, tetapi yang paling utama adalah harapanku agar kamu selalu diberikan kesehatan, kebahagiaan, umur yang bermanfaat, serta kemudahan dalam menjalani segala urusan.</p>
+      <p>Aku berharap di usia yang baru ini, kamu bisa menemukan lebih banyak alasan untuk tersenyum. Semoga hal-hal yang sedang kamu usahakan mendapatkan hasil yang baik dan segala keinginan yang selama ini kamu simpan dapat terwujud pada waktu yang tepat.</p>
+      <p>Aku juga berharap kamu bisa lebih menghargai dirimu sendiri. Jangan terlalu sering menyalahkan diri atas sesuatu yang berada di luar kendalimu. Tidak semua hal harus diselesaikan sekaligus, dan tidak semua keadaan harus kamu hadapi dengan memaksakan diri untuk selalu kuat.</p>
+      <p>Untuk teman ringkihku, tidak apa-apa jika terkadang kamu merasa lelah. Tidak apa-apa jika ada hari ketika semuanya terasa sulit. Kamu juga manusia yang berhak beristirahat dan mendapatkan kebahagiaan tanpa harus merasa bersalah.</p>
+      <p>Aku tidak tahu seperti apa perjalanan kita ke depannya. Mungkin akan ada banyak kesibukan, perubahan, dan hal-hal baru yang harus kita hadapi masing-masing. Namun, aku berharap semua itu tidak menghilangkan hubungan baik yang sudah kita bangun selama ini.</p>
+      <p>Terima kasih sudah menjadi bagian dari hari-hariku dan bersedia berbagi banyak hal denganku. Semoga di tahun-tahun berikutnya kita masih bisa bertukar cerita, menertawakan hal-hal sederhana, dan mengenang semua pengalaman yang pernah kita lalui.</p>
+      <p class="closing">“Selamat bertambah usia, Tiara. Semoga kehidupan memperlakukanmu dengan lebih baik, langkahmu selalu menemukan arah, dan hatimu senantiasa diberi ketenangan.”</p>
+      <p class="closing">Sekali lagi, selamat ulang tahun, teman ringkihku. 🤍</p>
+    </div>
+    <div class="ornament">🦋 ✧ 🌷</div>
+    <div class="page-number">03 / 03<div class="progress"><span style="width:100%"></span></div></div>
+    <div class="actions"><button class="secondary" onclick="showPage(2)">← Kembali</button><button onclick="showPage(4)">Selesai ✧</button></div>
+  </div>
+
+  <div class="screen" id="page4">
+    <div class="kicker">the end, but not the story</div><div class="ornament">✧ ❀ ✧</div>
+    <h2>Terima Kasih, Tiara</h2>
+    <p class="subtitle">Semoga kisah kecil ini menjadi pengingat bahwa pertemuan sederhana juga bisa menghadirkan persahabatan yang berarti.</p>
+    <div class="ornament">🦋 🤍 🦋</div>
+    <div class="actions"><button class="secondary" onclick="showPage(1)">Baca Lagi</button></div>
+  </div>
+</section></main>
+<audio id="backgroundMusic" src="Soft Piano Dreams.mp3" preload="auto" loop></audio>
+<script>
+function showPage(n){
+  const current=document.querySelector('.screen.active');
+  if(current) current.classList.remove('active');
+  const next=document.getElementById(n===0?'cover':'page'+n);
+  if(next) next.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function startStory(){
+  const music=document.getElementById('backgroundMusic');
+  if(music){music.volume=.65;music.play().catch(()=>{});}
+  showPage(1);
+}
+</script>
+</body></html>
